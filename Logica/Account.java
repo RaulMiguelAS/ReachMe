@@ -1,6 +1,8 @@
 package Logica;
 
 public class Account{
-    private
+    private String usuario;
+    private String senha;
+    private String email;
     
 }
