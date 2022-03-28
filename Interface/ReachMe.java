@@ -1,14 +1,21 @@
 package Interface;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Logica.Rede;
+
+
+
+
+
 public class ReachMe {
-    static Scanner scanner = new Scanner(System.in);
-    
+     static Scanner scanner = new Scanner(System.in);
+     static Rede conta = new Rede();
 
     public static void main(String[] args) {
         byte op = 1;
@@ -27,10 +34,11 @@ public class ReachMe {
 
             switch (op) {
                 case 1:
-                    singUp();
+                    conta.creatAccount();
+                    conta.String();
                     break;
                 case 2:
-                    logIn();
+                    //logIn();
                     break;
                 case 0:
                     System.out.println("See you soon.");
@@ -49,38 +57,10 @@ public class ReachMe {
         System.out.println("        {1} CREATE ACCOUNT ~ {2} LOGIN ~ {0} Exit");
         System.out.print("                     Choose an option: ");
     }
-    // SIGN UP
-    public static void singUp() {
-        scanner.nextLine();
-        System.out.println("EMAIL: ");
-        String email = scanner.nextLine();
-        while (insert_mail(email) == false) {
-            System.out.println("========================");
-            System.out.println("Please insert a valid email.");
-            System.out.println("EMAIL: ");
-            email = scanner.nextLine();
-        }
-        System.out.println("========================");
-        System.out.println("USERNAME: ");
-        String username = scanner.nextLine();
-        System.out.println("========================");
-        System.out.println("PASSWORD: ");
-        String password = scanner.nextLine();
-        System.out.println("========================");
-        System.out.println("BIRTHDATE (dd/MM/yyyy): ");
-        String birthdate = scanner.nextLine();
-        while (isDate(birthdate) == false) {
-            System.out.println("Please insert a valid birthdate.");
-            System.out.println("BIRTHDATE (dd/MM/yyyy): ");
-            birthdate = scanner.nextLine();
-        }
-        System.out.println("========================");
-        System.out.println("RELATIONSHIP: ");
-        String relationship = scanner.nextLine();
-        accounts.add(new CreateAccount(email, username, password, birthdate, relationship));
-    }
 
-    // LOG IN
+    
+
+    /*/ LOG IN
     public static void logIn() {
         scanner.nextLine();
         System.out.println("Insert your email: ");
@@ -90,24 +70,12 @@ public class ReachMe {
         System.out.println("PASSWORD: ");
         String password = scanner.nextLine();
         checkPassword(password);
-    }
+    }*/
     // VALIDATING METHODS.
 
-    public static boolean isMail(String email) {
-        String regex = "^(.)+@(.)+$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
+    
 
-        return matcher.matches();
-    }
-
-    public static boolean insert_mail(String email) {
-        if (!isMail(email)) {
-            return false;
-        } else {
-            return true;
-        }
-    }
+    
 
     public static boolean isDate(String date) {
         String regex = "^[0-3]?[0-9]/[0-1]?[0-2]/(?:[0-9]{2})?[0-9]{2}$";
@@ -115,7 +83,7 @@ public class ReachMe {
         Matcher matcher = pattern.matcher(date);
 
         return matcher.matches();
-    }
+    }}
 
     /*
      * public static boolean validateDate(String date){
@@ -124,16 +92,16 @@ public class ReachMe {
      * }
      */
 
-    public static int searchAccount(String email) {
+    /*public static int searchAccount(String email) {
         for (int i = 0; i < accounts.size(); i++) {
             if (email.equals(accounts.get(i).getEmail())) {
                 return i;
             }
         }
         return -1;
-    }
+    }*/
 
-    public static int checkAccount(String emailAd) {
+    /*public static int checkAccount(String emailAd) {
 
         int registered = searchAccount(emailAd);
         while (registered == -1) {
@@ -175,4 +143,4 @@ public class ReachMe {
         System.out.println("  ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝");
         System.out.println("             {ReachMe - Welcome" + username + "}                 ");
     }
-}
+}*/
