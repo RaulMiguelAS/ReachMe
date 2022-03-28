@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Rede{
-    private LinkedList<Account> Accounts = new LinkedList<Account>();
+    private static LinkedList<Account> Accounts = new LinkedList<Account>();
     static Scanner s= new Scanner(System.in);
 
 
@@ -55,6 +55,7 @@ public class Rede{
 
         return matcher.matches();
     }
+    //isDate aprender regex
     public static boolean isDate(String date) {
         String regex = "^[0-3]?[0-9]/[0-1]?[0-2]/(?:[0-9]{2})?[0-9]{2}$";
         Pattern pattern = Pattern.compile(regex);
@@ -85,8 +86,8 @@ public class Rede{
     }
 
     public static int searchAccount(String email) {
-        for (int i = 0; i < accounts.size(); i++) {
-            if (email.equals(accounts.get(i).getEmail())) {
+        for (Account account : Accounts) {
+            if ((account.getEmail()).equals(email)) {
                 return i;
             }
         }
@@ -113,13 +114,7 @@ public class Rede{
         return registered;
     }
 
-    public static boolean isDate(String date) {
-        String regex = "^[0-3]?[0-9]/[0-1]?[0-2]/(?:[0-9]{2})?[0-9]{2}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(date);
-
-        return matcher.matches();
-    }
+    
     
 
 
