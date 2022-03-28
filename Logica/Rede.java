@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class Rede{
     private LinkedList<Account> Accounts = new LinkedList<Account>();
-    Scanner s= new Scanner(System.in);
+    static Scanner s= new Scanner(System.in);
 
 
     public void creatAccount(){
@@ -62,7 +62,64 @@ public class Rede{
 
         return matcher.matches();
     }
+    public static void logIn() {
+        s.nextLine();
+        System.out.println("Insert your email: ");
+        String email = s.nextLine();
+        checkAccount(email);
+        System.out.println("========================");
+        System.out.println("PASSWORD: ");
+        String password = s.nextLine();
+        checkPassword(password);
+    }
 
+    public static int checkAccount(String emailAd) {
+
+        int registered = searchAccount(emailAd);
+        while (registered == -1) {
+            System.out.println("Email not registered, try again.");
+            emailAd = s.nextLine();
+            registered = searchAccount(emailAd);
+        }
+        return registered;
+    }
+
+    public static int searchAccount(String email) {
+        for (int i = 0; i < accounts.size(); i++) {
+            if (email.equals(accounts.get(i).getEmail())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    public static int searchPassword(String password) {
+        for (int i = 0; i < accounts.size(); i++) {
+            if (password.equals(accounts.get(i).getPassword())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+    public static int checkPassword(String passwordUser) {
+
+        int registered = searchPassword(passwordUser);
+        while (registered == -1) {
+            System.out.println("Invalid password, try again.");
+            passwordUser = s.nextLine();
+            registered = searchPassword(passwordUser);
+        }
+        return registered;
+    }
+
+    public static boolean isDate(String date) {
+        String regex = "^[0-3]?[0-9]/[0-1]?[0-2]/(?:[0-9]{2})?[0-9]{2}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(date);
+
+        return matcher.matches();
+    }
     
 
 
