@@ -9,7 +9,7 @@ public class Rede{
     private static LinkedList<Account> Accounts = new LinkedList<Account>();
     static Scanner s= new Scanner(System.in);
 
-
+   //Criar conta
     public void creatAccount(){
         
         System.out.println("EMAIL: ");
@@ -31,6 +31,18 @@ public class Rede{
         Accounts.add(a);
         
     }
+    // LogIn
+    public static String logIn() {
+        System.out.println("Insert your email: ");
+        String email = s.nextLine();
+        checkAccount(email);
+        System.out.println("========================");
+        System.out.println("PASSWORD: ");
+        String password = s.nextLine();
+        checkPassword(password);
+        return email;
+    }
+    //Testes
     public void String(){
         for(Account account : Accounts){
             System.out.println(account.getEmail());
@@ -39,7 +51,7 @@ public class Rede{
         }
         
     }
-
+    
     public static boolean insert_mail(String email) {
         if (!isMail(email)) {
             return false;
@@ -63,16 +75,7 @@ public class Rede{
 
         return matcher.matches();
     }
-    public static void logIn() {
-        s.nextLine();
-        System.out.println("Insert your email: ");
-        String email = s.nextLine();
-        checkAccount(email);
-        System.out.println("========================");
-        System.out.println("PASSWORD: ");
-        String password = s.nextLine();
-        checkPassword(password);
-    }
+    
 
     public static int checkAccount(String emailAd) {
 
@@ -88,15 +91,16 @@ public class Rede{
     public static int searchAccount(String email) {
         for (Account account : Accounts) {
             if ((account.getEmail()).equals(email)) {
-                return i;
+                return 1;
             }
         }
         return -1;
     }
+
     public static int searchPassword(String password) {
-        for (int i = 0; i < accounts.size(); i++) {
-            if (password.equals(accounts.get(i).getPassword())) {
-                return i;
+        for (Account account : Accounts) {
+            if ((account.getPassword()).equals(password)) {
+                return 1;
             }
         }
         return -1;
@@ -112,6 +116,15 @@ public class Rede{
             registered = searchPassword(passwordUser);
         }
         return registered;
+    }
+
+    public String getUser(String email){
+        for(Account account : Accounts){
+            if(account.getEmail().equals(email)){
+                return account.getUsername();
+            }
+        }
+        return null;
     }
 
     

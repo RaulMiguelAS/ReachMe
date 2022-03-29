@@ -1,16 +1,7 @@
 package Interface;
 
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import Logica.Rede;
-
-
-
 
 
 public class ReachMe {
@@ -35,10 +26,11 @@ public class ReachMe {
             switch (op) {
                 case 1:
                     conta.creatAccount();
-                    conta.String();
+                    //conta.String();
                     break;
                 case 2:
-                    //logIn();
+                   String email = conta.logIn();
+                    welcome(email);
                     break;
                 case 0:
                     System.out.println("See you soon.");
@@ -58,9 +50,9 @@ public class ReachMe {
         System.out.print("                     Choose an option: ");
     }
 
-
-    public static void welcome() {
-        String username = "";
+    public static void welcome(String email) {
+        String username = conta.getUser(email);
+ 
         System.out.println("");
         System.out.println("  ██████╗ ███████╗ █████╗  ██████╗██╗  ██╗███╗   ███╗███████╗");
         System.out.println("  ██╔══██╗██╔════╝██╔══██╗██╔════╝██║  ██║████╗ ████║██╔════╝");
@@ -68,6 +60,9 @@ public class ReachMe {
         System.out.println("  ██╔══██╗██╔══╝  ██╔══██║██║     ██╔══██║██║╚██╔╝██║██╔══╝  ");
         System.out.println("  ██║  ██║███████╗██║  ██║╚██████╗██║  ██║██║ ╚═╝ ██║███████╗");
         System.out.println("  ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝");
-        System.out.println("             {ReachMe - Welcome" + username + "}                 ");
+        System.out.println("             {ReachMe - Welcome " + username + "}                 ");
     }
+
+
+    
 }
