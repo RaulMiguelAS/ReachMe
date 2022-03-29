@@ -97,7 +97,7 @@ public class Rede{
         return -1;
     }
 
-    public static int searchPassword(String password) {
+    public static int searchPassword(String password, String email) {
         for (Account account : Accounts) {
             if ((account.getPassword()).equals(password)) {
                 return 1;
@@ -107,13 +107,13 @@ public class Rede{
     }
 
 
-    public static int checkPassword(String passwordUser) {
+    public static int checkPassword(String passwordUser, String email) {
 
-        int registered = searchPassword(passwordUser);
+        int registered = searchPassword(passwordUser, email);
         while (registered == -1) {
             System.out.println("Invalid password, try again.");
             passwordUser = s.nextLine();
-            registered = searchPassword(passwordUser);
+            registered = searchPassword(passwordUser, email);
         }
         return registered;
     }
