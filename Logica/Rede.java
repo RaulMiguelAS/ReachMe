@@ -32,7 +32,7 @@ public class Rede{
         
     }
     // LogIn
-    public static String logIn() {
+    public String logIn() {
         System.out.println("Insert your email: ");
         String email = s.nextLine();
         checkAccount(email);
@@ -52,7 +52,7 @@ public class Rede{
         
     }
     
-    public static boolean insert_mail(String email) {
+    public boolean insert_mail(String email) {
         if (!isMail(email)) {
             return false;
         } else {
@@ -60,7 +60,7 @@ public class Rede{
         }
     }
 
-    public static boolean isMail(String email) {
+    public boolean isMail(String email) {
         String regex = "^(.)+@(.)+$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
@@ -68,7 +68,7 @@ public class Rede{
         return matcher.matches();
     }
     //isDate aprender regex
-    public static boolean isDate(String date) {
+    public boolean isDate(String date) {
         String regex = "^[0-3]?[0-9]/[0-1]?[0-2]/(?:[0-9]{2})?[0-9]{2}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(date);
@@ -77,7 +77,7 @@ public class Rede{
     }
     
 
-    public static int checkAccount(String emailAd) {
+    public int checkAccount(String emailAd) {
 
         int registered = searchAccount(emailAd);
         while (registered == -1) {
@@ -88,7 +88,7 @@ public class Rede{
         return registered;
     }
 
-    public static int searchAccount(String email) {
+    public int searchAccount(String email) {
         for (Account account : Accounts) {
             if ((account.getEmail()).equals(email)) {
                 return 1;
@@ -97,7 +97,7 @@ public class Rede{
         return -1;
     }
 
-    public static int searchPassword(String password, String email) {
+    public int searchPassword(String password) {
         for (Account account : Accounts) {
             if ((account.getPassword()).equals(password)) {
                 return 1;
@@ -107,13 +107,13 @@ public class Rede{
     }
 
 
-    public static int checkPassword(String passwordUser, String email) {
+    public int checkPassword(String passwordUser) {
 
-        int registered = searchPassword(passwordUser, email);
+        int registered = searchPassword(passwordUser);
         while (registered == -1) {
             System.out.println("Invalid password, try again.");
             passwordUser = s.nextLine();
-            registered = searchPassword(passwordUser, email);
+            registered = searchPassword(passwordUser);
         }
         return registered;
     }
@@ -126,10 +126,4 @@ public class Rede{
         }
         return null;
     }
-
-    
-    
-
-
-    
-} 
+}
