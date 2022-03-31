@@ -35,13 +35,14 @@ public class Rede{
     //Edit ACCOUNT
     public void editAccount(String email){
         byte op=1;
-
+        System.out.println("=========================");
         System.out.println("What you want to edit?");
         System.out.println("{1} Username ");
         System.out.println("{2} Password");
         System.out.println("{3} Birthdate");
         System.out.println("{4} Relationship");
-        System.out.println("");
+        System.out.println("{0} Back to menu");
+        System.out.println("=========================");
         System.out.print("Choose an option: ");
         op= s.nextByte();
         switch (op) {
@@ -64,11 +65,10 @@ public class Rede{
                 break;
             case 2:
                 String oldPassword = "", newPassword = "";
-                int registered;
                 
                 System.out.println("Insert the old Password");
                 oldPassword = s.next();
-                registered = checkPassword(oldPassword);
+                checkPassword(oldPassword);
                 System.out.println("Insert the new Password");
                 newPassword = s.next();
                 while(oldPassword.equals(newPassword)){
@@ -87,6 +87,8 @@ public class Rede{
                 break;
             case 4:
                 System.out.println("to Implement.");
+                break;
+            case 0:
                 break;
         
             default:
