@@ -10,7 +10,7 @@ public class Rede{
     static Scanner s= new Scanner(System.in);
 
    //Criar conta
-    public void creatAccount(){
+    public void createAccount(){
         
         System.out.println("EMAIL: ");
         String email = s.nextLine();

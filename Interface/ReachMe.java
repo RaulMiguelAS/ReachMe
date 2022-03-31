@@ -25,7 +25,7 @@ public class ReachMe {
 
             switch (op) {
                 case 1:
-                    conta.creatAccount();
+                    conta.createAccount();
                     //conta.String();
                     break;
                 case 2:
