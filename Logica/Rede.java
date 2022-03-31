@@ -41,6 +41,7 @@ public class Rede{
         System.out.println("{2} Password");
         System.out.println("{3} Birthdate");
         System.out.println("{4} Relationship");
+        System.out.println("");
         System.out.print("Choose an option: ");
         op= s.nextByte();
         switch (op) {
@@ -62,7 +63,24 @@ public class Rede{
                 }
                 break;
             case 2:
-                System.out.println("to Implement.");
+                String oldPassword = "", newPassword = "";
+                int registered;
+                
+                System.out.println("Insert the old Password");
+                oldPassword = s.next();
+                registered = checkPassword(oldPassword);
+                System.out.println("Insert the new Password");
+                newPassword = s.next();
+                while(oldPassword.equals(newPassword)){
+                    System.out.println("the new password cannot be the same as the old one");
+                    newPassword = s.next();
+                }
+                for(Account account: Accounts){
+                    if(account.getEmail().equals(email)){
+                        account.setPassword(newPassword);
+                    }
+                }
+                
                 break;
             case 3:
                 System.out.println("to Implement.");
