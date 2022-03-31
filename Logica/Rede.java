@@ -22,7 +22,8 @@ public class Rede{
         }
         System.out.println("========================");
         System.out.print("USERNAME: ");
-        String username = s.nextLine();
+        String username = "Guest" +(1 + Math.random() * 99999999);
+        username = s.nextLine();
         System.out.println("========================");
         System.out.print("PASSWORD: ");
         String password = s.nextLine();
@@ -31,6 +32,52 @@ public class Rede{
         Accounts.add(a);
         
     }
+    //Edit ACCOUNT
+    public void editAccount(String email){
+        byte op=1;
+
+        System.out.println("What you want to edit?");
+        System.out.println("{1} Username ");
+        System.out.println("{2} Password");
+        System.out.println("{3} Birthdate");
+        System.out.println("{4} Relationship");
+        System.out.print("Choose an option: ");
+        op= s.nextByte();
+        switch (op) {
+            case 1:
+                char option = 'n';
+                String newUsername = "";
+                do{
+                    System.out.println("enter the new username: ");
+                    newUsername = s.next();
+                    System.out.println(newUsername+ " Is correct? 'S' or 'N'");
+                    option = s.next().charAt(0);
+                }while(option!='s' && option!='S');
+
+                for(Account account : Accounts){
+                    if ((account.getEmail()).equals(email)) {
+                        account.setUsername(newUsername);
+
+                    }
+                }
+                break;
+            case 2:
+                System.out.println("to Implement.");
+                break;
+            case 3:
+                System.out.println("to Implement.");
+                break;
+            case 4:
+                System.out.println("to Implement.");
+                break;
+        
+            default:
+                System.out.println("Insert a valid option");
+                break;
+        }
+
+    }
+
     // LogIn
     public String logIn() {
         System.out.println("Insert your email: ");
@@ -43,19 +90,25 @@ public class Rede{
         return email;
     }
     //Testes
-    public void String(){
-        for(Account account : Accounts){
-            System.out.println(account.getEmail());
-            System.out.println(account.getUsername());
-            System.out.println(account.getPassword());
-        }
+    // public void String(){
+    //     for(Account account : Accounts){
+    //         System.out.println(account.getEmail());
+    //         System.out.println(account.getUsername());
+    //         System.out.println(account.getPassword());
+    //     }
         
-    }
+    // }
     
     public boolean insert_mail(String email) {
         if (!isMail(email)) {
             return false;
         } else {
+            for (Account account : Accounts) {
+                if ((account.getEmail()).equals(email)) {
+                    System.out.println("This email is already registered");
+                    return false;
+                }
+            }
             return true;
         }
     }
