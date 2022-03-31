@@ -5,7 +5,7 @@ import Logica.Rede;
 
 
 public class ReachMe {
-      static Scanner scanner = new Scanner(System.in);
+      static Scanner s = new Scanner(System.in);
       static Rede conta = new Rede();
 
     public static void main(String[] args) {
@@ -21,7 +21,7 @@ public class ReachMe {
             System.out.println("  ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝");
             System.out.println("             {ReachMe - a UNICAP Social Media}                  ");
             menu1();
-            op = scanner.nextByte();
+            op = s.nextByte();
 
             switch (op) {
                 case 1:
@@ -30,7 +30,7 @@ public class ReachMe {
                     break;
                 case 2:
                    String email = conta.logIn();
-                    welcome(email);
+                    online(email);
                     break;
                 case 0:
                     System.out.println("See you soon.");
@@ -60,32 +60,38 @@ public class ReachMe {
         System.out.println("  ██╔══██╗██╔══╝  ██╔══██║██║     ██╔══██║██║╚██╔╝██║██╔══╝  ");
         System.out.println("  ██║  ██║███████╗██║  ██║╚██████╗██║  ██║██║ ╚═╝ ██║███████╗");
         System.out.println("  ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝");
-        System.out.println("             {ReachMe - Welcome " + username + "}                 ");
+        System.out.println("               {ReachMe - Welcome " + username +"}           ");
     }
 
-    public void menuOnline() {
+    public static void menuOnline() {
         System.out.println("");
         System.out.println("  ========================================================= ");
         System.out.println("     {1} EDIT ACCOUNT ~ {2} ADD FRIEND ~ {3} SEND MENSAGE");
         System.out.println("                         {0} LOGOUT                       ");
-        System.out.print("                         Choose an option: ");
+        System.out.print("                        Choose an option: ");
     }
 
-    public void online(){
+    public static void online(String email){
         Scanner s = new Scanner(System.in);
         byte op = 1;
  
         do {
+            welcome(email);
+            menuOnline();
             op = s.nextByte();
+
             switch (op)  {
                 case 1:
-                    System.out.println("");
+                    conta.editAccount(email);
                     break;
                 case 2:
-                    System.out.println("to Implement");
+                    System.out.println("to Implement.");
                     break;
                 case 3:
-                    System.out.println("");
+                    System.out.println("to Implement.");
+                    break;
+                case 0:
+                    System.out.println("See you soon.");;
                     break;
             
                 default:
