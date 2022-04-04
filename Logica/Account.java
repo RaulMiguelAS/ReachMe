@@ -4,10 +4,11 @@ package Logica;
 public class Account{
     private String email, password, username, birthdate, relationship;
     
-    public Account(String email, String username, String password){
+    public Account(String email, String username, String password, String birthdate){
         this.email = email;
-         this.username = username;
+        this.username = username;
         this.password = password;
+        this.birthdate = birthdate;
         
     }
 
