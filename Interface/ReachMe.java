@@ -52,6 +52,7 @@ public class ReachMe {
 
     public static void welcome(String email) {
         String username = conta.getUser(email);
+        
  
         System.out.println("");
         System.out.println("  ██████╗ ███████╗ █████╗  ██████╗██╗  ██╗███╗   ███╗███████╗");
@@ -61,6 +62,7 @@ public class ReachMe {
         System.out.println("  ██║  ██║███████╗██║  ██║╚██████╗██║  ██║██║ ╚═╝ ██║███████╗");
         System.out.println("  ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝");
         System.out.println("               {ReachMe - Welcome " + username +"}           ");
+        conta.Profile(email);
     }
 
     public static void menuOnline() {

@@ -92,25 +92,60 @@ public class Rede{
                 
                 break;
             case 3:
-            String birthdate = "";
-            System.out.println("Insert the new birthdate");
-            System.out.println("DD/MM/YYYY");
-            birthdate=s.nextLine();
-            while(!isDate(birthdate)){
-                System.out.println("Insert a valid birthdate");
-                System.out.println("DD/MM/YYYY");
-                System.out.print("BIRTHDATE: ");
-                birthdate = s.nextLine();
-            }
-            for(Account account: Accounts){
-                if(account.getEmail().equals(email)){
-                    account.setBirthdate(birthdate);
+                String birthdate = "";
+                    System.out.println("Insert the new birthdate");
+                    System.out.println("DD/MM/YYYY");
+                    birthdate=s.nextLine();
+                while(!isDate(birthdate)){
+                    System.out.println("Insert a valid birthdate");
+                    System.out.println("DD/MM/YYYY");
+                    System.out.print("BIRTHDATE: ");
+                    birthdate = s.nextLine();
                 }
-            }
+                for(Account account: Accounts){
+                    if(account.getEmail().equals(email)){
+                    account.setBirthdate(birthdate);
+                    }
+                }
                 break;
             case 4:
-                System.out.println("to Implement.");
-                 //opções ou a pessoa escreve?
+                byte opt=1;
+                System.out.println("=========================");
+                System.out.println("What you want to edit?");
+                System.out.println("{1} Namorando");
+                System.out.println("{2} Casado(a)");
+                System.out.println("{3} Solteiro(a)");
+                System.out.println("{0} Back to menu");
+                System.out.println("=========================");
+                opt=s.nextByte();
+                switch (opt) {
+                    case 1:
+                        for(Account account: Accounts){
+                            if(account.getEmail().equals(email)){
+                            account.setRelationship("namorando");                            }
+                        }
+                        break;
+                    case 2:
+                        for(Account account: Accounts){
+                            if(account.getEmail().equals(email)){
+                                account.setRelationship("Casado(a)");
+                            }
+                        }
+                        break;
+                    case 3:
+                        for(Account account: Accounts){
+                            if(account.getEmail().equals(email)){
+                            account.setRelationship("Solteiro(a)");
+                            }
+                        }
+                        break;
+                case 0:
+                        break;
+                default:
+                        System.out.println("Insert a valid option");
+                        break;
+                }
+
                 break;
             case 0:
                 break;
@@ -134,14 +169,19 @@ public class Rede{
         return email;
     }
     //Testes
-    // public void String(){
-    //     for(Account account : Accounts){
-    //         System.out.println(account.getEmail());
-    //         System.out.println(account.getUsername());
-    //         System.out.println(account.getPassword());
-    //     }
+    public void Profile(String email){
+        for(Account account : Accounts){
+            if((account.getEmail()).equals(email)){
+                System.out.println("===========================");
+                System.out.println("Username: " + account.getUsername());
+                System.out.println("Birthdate: " + account.getBirthdate());
+                System.out.println("Relationship: " + account.getRelationship());
+                System.out.println("===========================");
+
+            }
+        }
         
-    // }
+    }
     
     public boolean insert_mail(String email) {
         if (!isMail(email)) {
