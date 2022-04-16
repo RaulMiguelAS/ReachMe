@@ -1,16 +1,22 @@
 package Interface;
 
 import java.util.Scanner;
+
+import Logica.Amigos;
+import Logica.Mensagens;
 import Logica.Rede;
 
 
 public class ReachMe {
       static Scanner s = new Scanner(System.in);
-      static Rede conta = new Rede();
+      static Rede account = new Rede();
+      static Amigos friend = new Amigos();
+      static Mensagens message = new Mensagens();
+      
 
     public static void main(String[] args) {
         byte op = 1;
-
+        
         do {
             System.out.println("");
             System.out.println("  ██████╗ ███████╗ █████╗  ██████╗██╗  ██╗███╗   ███╗███████╗");
@@ -25,11 +31,11 @@ public class ReachMe {
 
             switch (op) {
                 case 1:
-                    conta.creatAccount();
+                    account.createAccount();
                     //conta.String();
                     break;
                 case 2:
-                   String email = conta.logIn();
+                   String email = account.logIn();
                     online(email);
                     break;
                 case 0:
@@ -51,7 +57,7 @@ public class ReachMe {
     }
 
     public static void welcome(String email) {
-        String username = conta.getUser(email);
+        String username = account.getUser(email);
  
         System.out.println("");
         System.out.println("  ██████╗ ███████╗ █████╗  ██████╗██╗  ██╗███╗   ███╗███████╗");
@@ -61,16 +67,26 @@ public class ReachMe {
         System.out.println("  ██║  ██║███████╗██║  ██║╚██████╗██║  ██║██║ ╚═╝ ██║███████╗");
         System.out.println("  ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝");
         System.out.println("               {ReachMe - Welcome " + username +"}           ");
+        
     }
 
     public static void menuOnline() {
         System.out.println("");
         System.out.println("  ========================================================= ");
-        System.out.println("     {1} EDIT ACCOUNT ~ {2} ADD FRIEND ~ {3} SEND MENSAGE");
-        System.out.println("                         {0} LOGOUT                       ");
-        System.out.print("                        Choose an option: ");
+        System.out.println("   {1} EDIT ACCOUNT ~ {2} FRIEND SECTION ~ {3} MESSAGES");
+        System.out.println("              {4} SHOW PROFILE ~ {0} LOGOUT               ");
+        System.out.print("                       Choose an option: ");
+        System.out.print("");
     }
 
+    public static void menuFriends(String email) {
+        System.out.println("");
+        System.out.println("  ========================================================= ");
+        System.out.println("     {1} ADD FRIEND ~ {2} REMOVE FRIEND ~ {3} SHOW FRIENDS");
+        System.out.println("                      {4} NOTIFICATIONS [" + account.getNotifications(email)+ "]");
+        System.out.print("                        Choose an option: ");
+        System.out.print("");
+    }
     public static void online(String email){
         Scanner s = new Scanner(System.in);
         byte op = 1;
@@ -82,13 +98,17 @@ public class ReachMe {
 
             switch (op)  {
                 case 1:
-                    conta.editAccount(email);
+                    account.editAccount(email);
                     break;
                 case 2:
-                    System.out.println("to Implement.");
+                    menuFriends(email);
+                    friend.optionFriends(email);
                     break;
                 case 3:
-                    System.out.println("to Implement.");
+                    message.optionMessages(email);
+                    break;
+                case 4:
+                    account.Profile(email);
                     break;
                 case 0:
                     System.out.println("See you soon.");;
