@@ -21,6 +21,7 @@ public class Account {
         MessageList = new LinkedList<HistoricoDeMensagens>();
     }
 
+
     public String getEmail() {
         return this.email;
     }

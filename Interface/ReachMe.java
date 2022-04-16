@@ -32,6 +32,7 @@ public class ReachMe {
             switch (op) {
                 case 1:
                     account.createAccount();
+
                     //conta.String();
                     break;
                 case 2:
@@ -57,7 +58,9 @@ public class ReachMe {
     }
 
     public static void welcome(String email) {
+
         String username = account.getUser(email);
+
  
         System.out.println("");
         System.out.println("  ██████╗ ███████╗ █████╗  ██████╗██╗  ██╗███╗   ███╗███████╗");
@@ -67,7 +70,6 @@ public class ReachMe {
         System.out.println("  ██║  ██║███████╗██║  ██║╚██████╗██║  ██║██║ ╚═╝ ██║███████╗");
         System.out.println("  ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝");
         System.out.println("               {ReachMe - Welcome " + username +"}           ");
-        
     }
 
     public static void menuOnline() {
