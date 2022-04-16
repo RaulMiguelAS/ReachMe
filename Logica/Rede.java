@@ -5,16 +5,17 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Rede{
-    private static LinkedList<Account> Accounts = new LinkedList<Account>();
-    static Scanner s= new Scanner(System.in);
+public class Rede {
+    protected static LinkedList<Account> Accounts = new LinkedList<Account>();
 
-   //Criar conta
-    public void creatAccount(){
-        
+    static Scanner s = new Scanner(System.in);
+
+    // Create account
+    public void createAccount() {
+
         System.out.println("EMAIL: ");
         String email = s.nextLine();
-        while (insert_mail(email) == false) {
+        while (!insert_mail(email)) {
             System.out.println("========================");
             System.out.println("Please insert a valid email.");
             System.out.print("EMAIL: ");
@@ -22,75 +23,127 @@ public class Rede{
         }
         System.out.println("========================");
         System.out.print("USERNAME: ");
-        String username = "Guest" +(1 + Math.random() * 99999999);
-        username = s.nextLine();
+        String username = s.nextLine();
         System.out.println("========================");
         System.out.print("PASSWORD: ");
         String password = s.nextLine();
         System.out.println("========================");
-        Account a = new Account(email, username, password);
+        System.out.println("DD/MM/YYYY");
+        System.out.println("BIRTHDATE: ");
+        String birthdate = s.nextLine();
+        while (!isDate(birthdate)) {
+            System.out.println("Insert a valid birthdate");
+            System.out.println("DD/MM/YYYY");
+            System.out.println("BIRTHDATE: ");
+            birthdate = s.nextLine();
+        }
+        Account a = new Account(email, username, password, birthdate);
         Accounts.add(a);
-        
+
     }
-    //Edit ACCOUNT
-    public void editAccount(String email){
-        byte op=1;
+
+    // Edit ACCOUNT
+    public void editAccount(String email) {
+        byte op = 1;
         System.out.println("=========================");
         System.out.println("What you want to edit?");
         System.out.println("{1} Username ");
         System.out.println("{2} Password");
         System.out.println("{3} Birthdate");
         System.out.println("{4} Relationship");
+        System.out.println("{5} Add Description");
         System.out.println("{0} Back to menu");
         System.out.println("=========================");
         System.out.print("Choose an option: ");
-        op= s.nextByte();
+        op = s.nextByte();
         switch (op) {
             case 1:
                 char option = 'n';
                 String newUsername = "";
-                do{
+                do {
                     System.out.println("enter the new username: ");
                     newUsername = s.next();
-                    System.out.println(newUsername+ " Is correct? 'S' or 'N'");
+                    System.out.println(newUsername + " Is correct? 'Y' or 'N'");
                     option = s.next().charAt(0);
-                }while(option!='s' && option!='S');
+                } while (option != 'y' && option != 'Y');
 
-                for(Account account : Accounts){
-                    if ((account.getEmail()).equals(email)) {
-                        account.setUsername(newUsername);
-
-                    }
-                }
+                Account continha = getAccount(email);
+                continha.setUsername(newUsername);
                 break;
             case 2:
                 String oldPassword = "", newPassword = "";
-                
+
                 System.out.println("Insert the old Password");
                 oldPassword = s.next();
                 checkPassword(oldPassword);
                 System.out.println("Insert the new Password");
                 newPassword = s.next();
-                while(oldPassword.equals(newPassword)){
+                while (oldPassword.equals(newPassword)) {
                     System.out.println("the new password cannot be the same as the old one");
                     newPassword = s.next();
                 }
-                for(Account account: Accounts){
-                    if(account.getEmail().equals(email)){
-                        account.setPassword(newPassword);
-                    }
-                }
-                
+                continha = getAccount(email);
+                continha.setPassword(newPassword);
+
                 break;
             case 3:
-                System.out.println("to Implement.");
+                String birthdate = "";
+                System.out.println("Insert the new birthdate");
+                System.out.println("DD/MM/YYYY");
+                birthdate = s.nextLine();
+                while (!isDate(birthdate)) {
+                    System.out.println("Insert a valid birthdate");
+                    System.out.println("DD/MM/YYYY");
+                    System.out.print("BIRTHDATE: ");
+                    birthdate = s.nextLine();
+                }
+                continha = getAccount(email);
+                continha.setBirthdate(birthdate);
                 break;
             case 4:
-                System.out.println("to Implement.");
+                byte opt = 1;
+                System.out.println("=========================");
+                System.out.println("What you want to edit?");
+                System.out.println("{1} Dating");
+                System.out.println("{2} Married");
+                System.out.println("{3} Single");
+                System.out.println("{0} Back to menu");
+                System.out.println("=========================");
+                opt = s.nextByte();
+                switch (opt) {
+                    case 1:
+                        continha = getAccount(email);
+                        continha.setRelationship("Dating");
+                        break;
+                    case 2:
+                        continha = getAccount(email);
+                        continha.setRelationship("Married");
+                        break;
+                    case 3:
+                        continha = getAccount(email);
+                        continha.setRelationship("Single");
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        System.out.println("Insert a valid option");
+                        break;
+                }
+                break;
+            case 5:
+                System.out.println("Insert your description: ");
+                s.nextLine();
+                String description = s.nextLine();
+                for (Account account : Accounts) {
+                    if (account.getEmail().equals(email)) {
+                        account.setDescription(description);
+                    }
+                }
+               System.out.println("Bio added.");
                 break;
             case 0:
                 break;
-        
+
             default:
                 System.out.println("Insert a valid option");
                 break;
@@ -109,16 +162,24 @@ public class Rede{
         checkPassword(password);
         return email;
     }
-    //Testes
-    // public void String(){
-    //     for(Account account : Accounts){
-    //         System.out.println(account.getEmail());
-    //         System.out.println(account.getUsername());
-    //         System.out.println(account.getPassword());
-    //     }
-        
-    // }
-    
+
+    // Testes
+    public void Profile(String email) {
+        System.out.println();
+        for (Account account : Accounts) {
+            if ((account.getEmail()).equals(email)) {
+                System.out.println("===========================");
+                System.out.println("Username: " + account.getUsername());
+                System.out.println("Birthdate: " + account.getBirthdate());
+                System.out.println("Relationship: " + account.getRelationship());
+                System.out.println("Bio: " + account.getDescription());
+                System.out.println("===========================");
+
+            }
+        }
+
+    }
+
     public boolean insert_mail(String email) {
         if (!isMail(email)) {
             return false;
@@ -140,7 +201,8 @@ public class Rede{
 
         return matcher.matches();
     }
-    //isDate aprender regex
+
+    // isDate aprender regex
     public boolean isDate(String date) {
         String regex = "^[0-3]?[0-9]/[0-1]?[0-2]/(?:[0-9]{2})?[0-9]{2}$";
         Pattern pattern = Pattern.compile(regex);
@@ -148,17 +210,17 @@ public class Rede{
 
         return matcher.matches();
     }
-    
 
-    public int checkAccount(String emailAd) {
+    public String checkAccount(String emailAd) {
 
         int registered = searchAccount(emailAd);
         while (registered == -1) {
-            System.out.println("Email not registered, try again.");
+            System.out.print("Email not registered, try again: ");
             emailAd = s.nextLine();
             registered = searchAccount(emailAd);
         }
-        return registered;
+        return emailAd;
+
     }
 
     public int searchAccount(String email) {
@@ -179,7 +241,6 @@ public class Rede{
         return -1;
     }
 
-
     public int checkPassword(String passwordUser) {
 
         int registered = searchPassword(passwordUser);
@@ -191,12 +252,37 @@ public class Rede{
         return registered;
     }
 
-    public String getUser(String email){
-        for(Account account : Accounts){
-            if(account.getEmail().equals(email)){
+    public String getUser(String email) {
+        for (Account account : Accounts) {
+            if (account.getEmail().equals(email)) {
+                String tempName;
+                if (account.getUsername().equals("")) {
+                    tempName = "Guest" + (int) (1 + Math.random() * 999999);
+                    account.setUsername(tempName);
+                }
                 return account.getUsername();
             }
         }
         return null;
     }
+
+    public int getNotifications(String email) {
+        for (Account account : Accounts) {
+            if (account.getEmail().equals(email)) {
+                return account.getNotifications();
+            }
+        }
+        return 0;
+    }
+
+    public Account getAccount(String email){
+        for(Account account : Accounts){
+            if(account.getEmail().equals(email)){
+                return account;
+            }
+        }
+        return null;
+    }
+
+
 }
